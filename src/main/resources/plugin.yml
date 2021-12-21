@@ -1,0 +1,5 @@
+name: Zenmessages
+version: '${project.version}'
+main: org.zen.zenmessages.ZenMessages
+description: Message plugin
+author: Lagggpixel
