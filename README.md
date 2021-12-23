@@ -7,6 +7,8 @@ Commands:
 		permission: none
 	reply:
 		permission: none
+	ignore:
+		permissionL none
 	messagemode:
 		permission: ZenPvP.Spy
 		description: Old social spy feature
