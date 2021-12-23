@@ -1,8 +1,9 @@
 # ZenMessage
 ZenPvP Message Plugin
 
+```
 Commands:
-  message:
+	message:
     permission: none
   reply:
     permission: none
@@ -12,4 +13,4 @@ Commands:
   togglemessage:
     permission: ZenPvP.Toggle
     description: disallowing/allowing players to send you messages (immune for people who have "ZenPvP.Toggle")
-   
+   ```
