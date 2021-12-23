@@ -8,9 +8,11 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
 import org.zen.zenmessages.Manager.MessageManager;
+import org.zen.zenmessages.Utils.IgnoreConfig;
 import org.zen.zenmessages.ZenMessages;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Message extends Command implements TabExecutor {
 
@@ -35,6 +37,9 @@ public class Message extends Command implements TabExecutor {
             if (args.length > 1) {
                 BaseComponent NotOnline =
                         new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + "[!]" + ChatColor.RESET + ChatColor.RED + " " + args[0] + " is not online");
+                BaseComponent Ignore =
+                        new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + "[!]" + ChatColor.RESET + ChatColor.RED + " You can't send messages to that player");
+
 
                 ArrayList<ProxiedPlayer> MessageToggled = ZenMessages.GetMessageToggledList();
 
@@ -43,6 +48,8 @@ public class Message extends Command implements TabExecutor {
                     sender.sendMessage(NotOnline);
                 } else if ((!sender.hasPermission("ZenPvP.Toggle")) && MessageToggled.contains(receiver)) {
                     sender.sendMessage(NotOnline);
+                } else if (MessageManager.Ignored(sender, receiver)) {
+                    sender.sendMessage(Ignore);
                 } else {
                     MessageManager.SendMessage(sender, receiver, args);
                 }

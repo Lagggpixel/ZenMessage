@@ -7,32 +7,32 @@ import org.zen.zenmessages.ZenMessages;
 import java.io.File;
 import java.io.IOException;
 
-public class ReplyConfig {
-    public static FileConfiguration ReplyConfiguration;
-    static File ReplyFile;
+public class IgnoreConfig {
+    public static FileConfiguration IgnoreConfiguration;
+    static File IgnoreFile;
     static ZenMessages plugin = ZenMessages.getInstance();
 
     public static void Setup() {
-        ReplyFile = new File(plugin.getDataFolder(), "LastMessage.yml");
-        if (!ReplyFile.exists()) {
+        IgnoreFile = new File(plugin.getDataFolder(), "Ignore.yml");
+        if (!IgnoreFile.exists()) {
             try {
-                ReplyFile.getParentFile().mkdirs();
-                ReplyFile.createNewFile();
+                IgnoreFile.getParentFile().mkdirs();
+                IgnoreFile.createNewFile();
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        ReplyConfiguration = (FileConfiguration)YamlConfiguration.loadConfiguration(ReplyFile);
+        IgnoreConfiguration = (FileConfiguration) YamlConfiguration.loadConfiguration(IgnoreFile);
     }
 
     public static FileConfiguration Get() {
-        return ReplyConfiguration;
+        return IgnoreConfiguration;
     }
 
     public static void Save() {
         try {
-            ReplyConfiguration.save(ReplyFile);
+            IgnoreConfiguration.save(IgnoreFile);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -40,7 +40,6 @@ public class ReplyConfig {
     }
 
     public static void Reload() {
-        ReplyConfiguration = (FileConfiguration) YamlConfiguration.loadConfiguration(ReplyFile);
+        IgnoreConfiguration = (FileConfiguration) YamlConfiguration.loadConfiguration(IgnoreFile);
     }
 }
-

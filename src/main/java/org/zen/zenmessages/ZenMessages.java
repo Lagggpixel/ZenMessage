@@ -2,10 +2,8 @@ package org.zen.zenmessages;
 
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
-import org.zen.zenmessages.Commands.Message;
-import org.zen.zenmessages.Commands.MessageMod;
-import org.zen.zenmessages.Commands.Reply;
-import org.zen.zenmessages.Commands.ToggleMessage;
+import org.zen.zenmessages.Commands.*;
+import org.zen.zenmessages.Utils.IgnoreConfig;
 import org.zen.zenmessages.Utils.ReplyConfig;
 
 import java.util.ArrayList;
@@ -32,10 +30,12 @@ public final class ZenMessages extends Plugin {
         this.getProxy().getPluginManager().registerCommand(this, new Reply());
         this.getProxy().getPluginManager().registerCommand(this, new ToggleMessage());
         this.getProxy().getPluginManager().registerCommand(this, new MessageMod());
+        this.getProxy().getPluginManager().registerCommand(this, new Ignore());
     }
 
     public void SetupConfigs() {
         ReplyConfig.Setup();
+        IgnoreConfig.Setup();
     }
 
     public static ZenMessages getInstance() {

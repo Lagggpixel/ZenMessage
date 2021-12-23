@@ -11,7 +11,7 @@ import org.zen.zenmessages.ZenMessages;
 
 import java.util.ArrayList;
 
-public class MessageMod extends Command implements TabExecutor {
+public class MessageMod extends Command {
 
     BaseComponent InvalidUsage =
             new TextComponent(ChatColor.RED + "" + ChatColor.BOLD  + "[!]" + ChatColor.RESET + ChatColor.RED + " Usage: /messagespy");
@@ -49,8 +49,4 @@ public class MessageMod extends Command implements TabExecutor {
         }
     }
 
-    @Override
-    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
-        return null;
-    }
 }
