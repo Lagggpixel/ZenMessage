@@ -9,7 +9,7 @@ import net.md_5.bungee.api.plugin.Command;
 import org.zen.zenmessages.Manager.MessageManager;
 
 public class Reply extends Command {
-    BaseComponent NoArgs = new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + "[!]" + ChatColor.RESET + ChatColor.RED +" Please enter a message to send");
+    BaseComponent NoArgs = new TextComponent(ChatColor.RED + "" + ChatColor.BOLD + "[!]" + ChatColor.RESET + ChatColor.RED +" Usage: /reply <message>");
 
     public Reply() {
         super("reply", null, "r");
@@ -26,5 +26,6 @@ public class Reply extends Command {
             }
         }
     }
-
 }
+
+

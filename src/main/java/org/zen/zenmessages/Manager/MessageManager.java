@@ -7,7 +7,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import org.zen.zenmessages.Utils.ReplyConfig;
 import org.zen.zenmessages.ZenMessages;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
 public class MessageManager {
 
@@ -15,19 +15,23 @@ public class MessageManager {
 
     public static void SendMessage(ProxiedPlayer sender, ProxiedPlayer receiver, String[] args) {
         String server = sender.getServer().getInfo().getName();
+        ArrayList<ProxiedPlayer> spy = ZenMessages.GetSocialSpyList();
         BaseComponent MessageSender = new TextComponent(
                 ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.RED + "me" + ChatColor.GOLD + " >> " + ChatColor.YELLOW + receiver.getName() + ChatColor.GOLD + ")"
         );
         BaseComponent MessageReceiver = new TextComponent(
                 ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.YELLOW + sender.getName() + ChatColor.GOLD + " >> " + ChatColor.RED + "me" + ChatColor.GOLD + ")"
         );
-
+        BaseComponent MessageMod = new TextComponent(
+                ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.YELLOW + sender.getName() + ChatColor.GOLD + " >> " + ChatColor.YELLOW + receiver.getName() + ChatColor.GOLD + ")"
+        );
 
         int i = 0;
         for (String arg : args) {
             if (i != 0) {
                 MessageSender.addExtra(" " + arg);
                 MessageReceiver.addExtra(" " + arg);
+                MessageMod.addExtra(" " + arg);
             }
             i++;
         }
@@ -37,20 +41,58 @@ public class MessageManager {
         ReplyConfig.Save();
         sender.sendMessage(MessageSender);
         receiver.sendMessage(MessageReceiver);
+
+        if (!spy.isEmpty()) {
+            for (ProxiedPlayer player : spy) {
+                player.sendMessage(MessageMod);
+            }
+        }
     }
 
     public static void ReplyMessage(ProxiedPlayer sender, String[] args) {
         String senderName = String.valueOf(sender.getName());
         String receiverName = ReplyConfig.Get().getString(senderName);
         ProxiedPlayer receiver = ZenMessages.getInstance().getProxy().getPlayer(receiverName);
+        ArrayList<ProxiedPlayer> MessageToggled = ZenMessages.GetMessageToggledList();
 
-        if (receiver == null) {
+        ArrayList<ProxiedPlayer> spy = ZenMessages.GetSocialSpyList();
+
+        if (receiver == null || MessageToggled.contains(receiver)) {
             BaseComponent NotOnlineMessage = new TextComponent(
                     ChatColor.RED + "" + ChatColor.BOLD + "[!]" + ChatColor.RESET + ChatColor.RED + " The person you are trying to message is not online."
             );
             sender.sendMessage(NotOnlineMessage);
         } else {
-            SendMessage(sender, receiver, args);
+            String server = sender.getServer().getInfo().getName();
+            BaseComponent MessageSender = new TextComponent(
+                    ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.RED + "me" + ChatColor.GOLD + " >> " + ChatColor.YELLOW + receiver.getName() + ChatColor.GOLD + ")"
+            );
+            BaseComponent MessageReceiver = new TextComponent(
+                    ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.YELLOW + sender.getName() + ChatColor.GOLD + " >> " + ChatColor.RED + "me" + ChatColor.GOLD + ")"
+            );
+
+            BaseComponent MessageMod = new TextComponent(
+                    ChatColor.GOLD + "(" + ChatColor.YELLOW + server + ChatColor.GOLD + ") (" + ChatColor.YELLOW + sender.getName() + ChatColor.GOLD + " >> " + ChatColor.YELLOW + receiver.getName() + ChatColor.GOLD + ")"
+            );
+
+            for (String arg : args) {
+                MessageSender.addExtra(" " + arg);
+                MessageReceiver.addExtra(" " + arg);
+                MessageMod.addExtra(" " + arg);
+            }
+
+            ReplyConfig.Get().set(String.valueOf(sender.getName()), String.valueOf(receiver.getName()));
+            ReplyConfig.Get().set(String.valueOf(receiver.getName()), String.valueOf(sender.getName()));
+            ReplyConfig.Save();
+            sender.sendMessage(MessageSender);
+            receiver.sendMessage(MessageReceiver);
+
+            if (!spy.isEmpty()) {
+                for (ProxiedPlayer player : spy) {
+                    player.sendMessage(MessageMod);
+                }
+            }
+
         }
 
     }

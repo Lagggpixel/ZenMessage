@@ -1,5 +1,7 @@
+org\zen\zenmessages\Commands\ToggleMessage.class
 org\zen\zenmessages\Commands\Message.class
 org\zen\zenmessages\ZenMessages.class
 org\zen\zenmessages\Manager\MessageManager.class
 org\zen\zenmessages\Utils\ReplyConfig.class
+org\zen\zenmessages\Commands\MessageMod.class
 org\zen\zenmessages\Commands\Reply.class

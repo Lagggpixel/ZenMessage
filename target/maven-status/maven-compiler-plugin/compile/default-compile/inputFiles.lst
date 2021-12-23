@@ -1,5 +1,7 @@
 D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\ZenMessages.java
 D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Commands\Message.java
 D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Commands\Reply.java
+D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Commands\ToggleMessage.java
 D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Utils\ReplyConfig.java
+D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Commands\MessageMod.java
 D:\Minecraft\Plugins\Zen\ZenMessage\src\main\java\org\zen\zenmessages\Manager\MessageManager.java
